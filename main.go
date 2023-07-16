@@ -19,7 +19,7 @@ func main() {
 	gs := grpc.NewServer()
 
 	reflection.Register(gs)
-	
+
 	cs:= server.NewCurrencyServer(logger)
 
 	protos.RegisterCurrencyServer(gs, cs)
@@ -34,3 +34,17 @@ func main() {
 	gs.Serve(listener)
 
 }
+
+// to use the grpcurl to list all the services in our system use this command
+// > grpcurl --plaintext localhost:5050 list
+
+// to use the grpcurl to list all the methods inside the service in our system use this command
+// > grpcurl --plaintext localhostom :5050 list Currency
+
+/*
+➜ Grpc-patterns-Golang git:(main) grpcurl --plaintext localhost:5050 describe Currency
+	Currency is a service:
+	service Currency {
+	rpc GetRate ( .RateReq ) returns ( .RateRes );
+	}
+*/
