@@ -8,6 +8,7 @@ import (
 )
 type Currency struct {
 	logger hclog.Logger
+	protos.UnimplementedCurrencyServer 
 }
 
 func (c *Currency) GetRate(ctx context.Context,req *protos.RateReq)(*protos.RateRes, error){
@@ -16,3 +17,6 @@ func (c *Currency) GetRate(ctx context.Context,req *protos.RateReq)(*protos.Rate
 	return &protos.RateRes{Rate: float32(0.5)}, nil
 }
 
+func NewCurrencyServer (l hclog.Logger) *Currency{
+	return &Currency{logger: l}
+}
