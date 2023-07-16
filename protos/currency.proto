@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "github.com/FadyGamilM/gogrpc/protos/currency";
+
+
+service Currency {
+    // GetRate() is a method that returns an number which can be used to convert from one type to another 
+    rpc GetRate(RateReq) returns (RateRes);
+}
+
+message RateReq {
+    string BaseCurrencyType = 1;
+    string DestinationCurrencyType = 2;
+}
+
+message RateRes {
+    float Rate = 1;
+}
+/*
+protoc -I .\protos .\protos\currency.proto --go_out=.\protos\currency --go_opt=paths=source_relative --go-grpc_out=.\protos\currency --go-grpc_opt=paths=source_relative
+*/
